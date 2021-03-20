@@ -1,0 +1,16 @@
+// Promises
+
+const p = new Promise((resolve, reject)=> {
+    let a = 1 + 4;
+    if (a === 2) {
+        resolve('success')
+    } else {
+        reject('Failed')
+    }
+})
+
+p.then((resolvedValue) => {
+    console.log('this is in then' + resolvedValue);
+}).catch((err) => {
+    console.log(err);
+})
