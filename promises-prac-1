@@ -1,16 +1,26 @@
 // Promises
 
-const p = new Promise((resolve, reject)=> {
-    let a = 1 + 4;;
-    if (a === 2) {
-        resolve('success');
-    } else {
-        reject('Failed');
-    }
+const recordVideoOne = new Promise((resolve, reject) => {
+    resolve('Video 1 Recorded');
 });
 
-p.then((resolvedValue) => {
-    console.log('this is in then' + resolvedValue);
+const recordVideoTwo = new Promise((resolve, reject) => {
+    if (true) {
+        reject('Video 2 rejected');
+    }
+    resolve('Video 2 Recorded');
+});
+
+const recordVideoThree = new Promise((resolve, reject) => {
+    resolve('Video 3 Recorded');
+});
+
+Promise.all([recordVideoOne,recordVideoTwo, recordVideoThree]).then(resolvedValue => console.log(resolvedValue));
+
+recordVideoOne.then((resolvedValue) => {
+    return recordVideoTwo;
+}).then((resolvedValue) => {
+    return recordVideoThree;
 }).catch((err) => {
     console.log(err);
-});
+})
